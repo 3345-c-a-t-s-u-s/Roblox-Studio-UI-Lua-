@@ -12,7 +12,6 @@
 	I'm Bad
 ]]
 
-local Version = 1
 local Core = game:FindFirstChild('CoreGui') or game:GetService('Players').LocalPlayer.PlayerGui
 local LUser = game:WaitForChild('Players').LocalPlayer
 local TweenService = game:GetService('TweenService')
@@ -28,7 +27,8 @@ local RBS_UI = {
 		Shop = "rbxassetid://7734056747",
 	},
 	ToggleKey = Enum.KeyCode.RightControl,
-	CanMove = true;
+	CanMove = true,
+	Version = 2
 }
 
 local function CalculateDistance(pointA, pointB)
