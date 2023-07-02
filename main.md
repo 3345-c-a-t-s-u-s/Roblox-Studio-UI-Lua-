@@ -36,7 +36,7 @@ Section:NewKeybinds("Key",Enum.KeyCode.X,function(newkey)
 end)
 ```
 
-# Assets Opstion
+# Assets Option
 
 ## Dropdown
 ```lua
