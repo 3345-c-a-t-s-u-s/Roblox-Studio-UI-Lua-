@@ -331,7 +331,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 
 	UIGridLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 		wait()
-		TweenService:Create(Section,TweenInfo.new(0.3),{CanvasSize = UDim2.new(0,0,0,UIGridLayout.AbsoluteContentSize.Y * 1.5)}):Play()
+		TweenService:Create(Section,TweenInfo.new(0.3),{CanvasSize = UDim2.new(0,0,0,UIGridLayout.AbsoluteContentSize.Y * 2.1)}):Play()
 	end)
 	
 	local LogLoad = Instance.new("Frame")
