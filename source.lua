@@ -1614,7 +1614,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 				Togggleing = false
 			else
 				Togggleing = true
-				TweenService:Create(Frame,TweenInfo.new(Corrent),{Size = UDim2.new(0.4,0,0.4,0),Position = Toggle_LastPosition or UDim2.new(0.49999997, 0, 0.499320686, 0)}):Play()
+				TweenService:Create(Frame,TweenInfo.new(Corrent),{Size = UDim2.new(0.37, 0, 0.43, 0),Position = Toggle_LastPosition or UDim2.new(0.49999997, 0, 0.499320686, 0)}):Play()
 			end
 		end
 	end)
@@ -1626,7 +1626,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Togggleing = false
 		else
 			Togggleing = true
-			TweenService:Create(Frame,TweenInfo.new(Corrent),{Size = UDim2.new(0.4,0,0.4,0),Position = Toggle_LastPosition or UDim2.new(0.49999997, 0, 0.499320686, 0)}):Play()
+			TweenService:Create(Frame,TweenInfo.new(Corrent),{Size = UDim2.new(0.37, 0, 0.43, 0),Position = Toggle_LastPosition or UDim2.new(0.49999997, 0, 0.499320686, 0)}):Play()
 		end
 	end)
 	
