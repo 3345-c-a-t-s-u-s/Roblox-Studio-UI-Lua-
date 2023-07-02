@@ -905,11 +905,11 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 
 			function ToggleAsset:Set(Value)
 				ToggleValue = Value
-				ToggleTo(ToggleValue)
+				ToggleTo(not ToggleValue)
 				callback(ToggleValue)
 			end
 
-			ToggleTo(ToggleValue)
+			ToggleTo( not ToggleValue)
 
 			return ToggleAsset
 		end
