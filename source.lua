@@ -6,9 +6,10 @@
 	|		|		|
 	|		|		|
 	|		|		|
-	|_______|_______|
+	|_______|_______	|
 	|		|		|
 	|_______|_______|
+	I'm Bad
 ]]
 
 local Version = 1
@@ -1030,10 +1031,11 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Dropdown.BorderSizePixel = 0
 			Dropdown.Size = UDim2.new(0.899999976, 0, 0.5, 0)
-
+			
 			UIAspectRatioConstraint.Parent = Dropdown
 			UIAspectRatioConstraint.AspectRatio = 1.500
-
+			UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
+			
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = Dropdown
 
