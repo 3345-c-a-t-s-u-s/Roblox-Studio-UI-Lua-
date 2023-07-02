@@ -899,7 +899,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					ToggleValue = true
 				end
 
-				ToggleTo(ToggleValue)
+				ToggleTo(not ToggleValue)
 				callback(ToggleValue)
 			end)
 
