@@ -1,66 +1,95 @@
 # Roblox Studio UI - Make your onwer Script Hub
 
-## Create Window
+## Request 
 ```lua
 local RobloxStudioUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/Roblox-Studio-UI-Lua-/main/source.lua"))()
-
+```
+## Create Window
+```lua
 local Window = RobloxStudioUI:NewWindow("Roblox Studio UI","Role Of Player")
 ```
 ## Create Section
 ```lua
-local Section = Window:NewSection("Scetion",Module.ImageIcon.Server,Color3.fromRGB(0, 115, 255))
+local Section = Window:NewSection("Section - Name",RobloxStudioUI.ImageIcon.Client,Color3.fromRGB(25, 255, 79))
+
+--[[
+1) Name - String
+2) Image - RbxId or Image in Library
+3) Color Of Image - Color3
+]]
 ```
 
-## Create Assets
+## Create Label
 ```lua
-Section:NewDropdown("Dropdwon",{"1","2","3"},function(Stats)
-	print(Stats)
-end)
+Section:NewLabel("Label - UI")
 
-Section:NewLabel("Label")
+---- Changing the value
 
-Section:NewButton("Button",function()
-	print('is click')
-end)
+local Label = Section:NewLabel("Label - UI")
 
-Section:NewSlider(1,100,function(number)
-	print(number)
-end)
+Label:Set("New Label - UI")
 
-Section:NewToggle("Toggle",false,function(boolen)
-	print(boolen)
-end)
-
-Section:NewKeybinds("Key",Enum.KeyCode.X,function(newkey)
-	print(newkey)
-end)
 ```
-
-# Assets Option
-
-## Dropdown
+## Create Button
 ```lua
-Dropdown:Set({"4","5","6"})
-Dropdown:Refresh()
-```
+Section:NewButton("Button - UI",function()
 
-## Label
-```lua
-Label:Set("New Label")
-```
-## Button
-```lua
+---- Changing the value
+
+local Button = Section:NewButton("Button - UI",function()
+	
+end)
+
 Button:Set("New Label")
 ```
-## Slider
+## Create Slider
 ```lua
-Slider:Set(50) -- Number
+Section:NewSlider(1,50,function(Value)
+
+---- Changing the value
+
+local Slider = Section:NewSlider(0,50,function(Value)
+	
+end)
+
+Slider:Set(25)
 ```
-## Toggle
+## Create Toggle
 ```lua
-Toggle:Set(false) -- boolen
+Section:NewToggle("Toggle - UI",false,function(Boolen)
+
+---- Changing the value
+
+local Toggle = Section:NewToggle("Toggle - UI",false,function(Boolen)
+	
+end)
+
+Toggle:Set(true)
 ```
-## Keybind
+## Create Dropdown
 ```lua
-Keybind:Set(Enum.KeyCode.J)
+Section:NewDropdown("Dropdown - UI",{"1","2","3"},function(String)
+
+---- Changing the value
+
+local Dropdown = Section:NewDropdown("Dropdown - UI",{"1","2","3"},function(String)
+	
+end)
+
+Dropdown:Set({"4","5","6"})
+Dropdown:Refresh()	
+```
+## Create Keybinds
+```lua
+Section:NewKeybinds("Keybinds - UI",Enum.KeyCode.X,function(Key)
+	
+end)
+
+---- Changing the value
+
+local Keybinds = Section:NewKeybinds("Keyinds - UI",Enum.KeyCode.X,function(Key)
+	
+end)
+
+Keybinds:Set(Enum.KeyCode.E)
 ```
