@@ -1,4 +1,5 @@
 --[[
+AS
 	|----------------|
 	|ROBLOX STUDIO UI|
 	|----------------|
@@ -28,7 +29,7 @@ local RBS_UI = {
 	},
 	ToggleKey = Enum.KeyCode.RightControl,
 	CanMove = true,
-	Version = 2
+	Version = 3
 }
 
 local function CalculateDistance(pointA, pointB)
@@ -37,7 +38,7 @@ end
 
 function Create_Ripple(Parent : Frame)
 	Parent.ClipsDescendants = true
-	
+
 	local ripple = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local UIStroke = Instance.new('UIStroke',ripple)
@@ -91,9 +92,9 @@ local function TweenClose(UIobj : Frame | GuiObject,tweeninfo,target,data,set_to
 end
 
 local function Scrol(Scr:ScrollingFrame,UIL:UIListLayout)
-	Scr.CanvasSize = UDim2.new(0,0,0,UIL.AbsoluteContentSize.Y)
+	Scr.CanvasSize = UDim2.new(0,0,0,UIL.AbsoluteContentSize.Y+10)
 	return UIL:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		TweenService:Create(Scr,TweenInfo.new(0.2),{CanvasSize = UDim2.new(0,0,0,UIL.AbsoluteContentSize.Y)}):Play()
+		TweenService:Create(Scr,TweenInfo.new(0.2),{CanvasSize = UDim2.new(0,0,0,UIL.AbsoluteContentSize.Y+10)}):Play()
 	end)
 end
 
@@ -103,7 +104,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	local Toggle_LastPosition = nil
 	local WindowAssets = {}
 	local Tabs = {}
-	
+
 	local Roblox_Studio_UI = Instance.new("ScreenGui")
 	local Frame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
@@ -128,9 +129,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	local UIStroke = Instance.new("UIStroke")
 	local UIGradient_2 = Instance.new("UIGradient")
 	local UIGradient_3 = Instance.new("UIGradient")
-	
-	Scrol(Section,UIGridLayout)
-	
+
 	Roblox_Studio_UI.Name = "{0x"..tostring(math.random(1,100))..tostring(math.random(1,100)).."x"..tostring(math.random(1,100)).."x6}"
 	Roblox_Studio_UI.IgnoreGuiInset = true
 	Roblox_Studio_UI.Parent = Core
@@ -146,7 +145,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	Frame.ZIndex = -1
 	Frame.ClipsDescendants = true
 	Frame.Active = true
-	
+
 	UICorner.CornerRadius = UDim.new(0, 4)
 	UICorner.Parent = Frame
 
@@ -164,7 +163,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	shadow.ScaleType = Enum.ScaleType.Slice
 	shadow.SliceCenter = Rect.new(95, 95, 205, 205)
 	shadow.Rotation = 0.1
-	
+
 	UICorner_2.CornerRadius = UDim.new(0, 4)
 	UICorner_2.Parent = shadow
 
@@ -324,7 +323,11 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	UIGradient_3.Rotation = -25
 	UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.42), NumberSequenceKeypoint.new(1.00, 0.00)}
 	UIGradient_3.Parent = Toggle
-	
+
+	UIGridLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
+		wait()
+		TweenService:Create(Section,TweenInfo.new(0.3),{CanvasSize = UDim2.new(0,0,0,UIGridLayout.AbsoluteContentSize.Y * 2)}):Play()
+	end)
 	
 	local LogLoad = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
@@ -355,7 +358,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 
 	UICorner_2.CornerRadius = UDim.new(0, 4)
 	UICorner_2.Parent = LOAD
-	
+
 	local function MakeLoad(timeing)
 		LOAD.Size = UDim2.new(0,0,1,0)
 		LOAD.BackgroundTransparency = 0.800
@@ -364,9 +367,10 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		tween.Completed:Wait()
 		TweenService:Create(LOAD,TweenInfo.new(0.45),{BackgroundTransparency = 1}):Play()
 	end
-	
+
 	MakeLoad(0.1)
-	
+
+
 	function WindowAssets:NewSection(TitleJJ,Image,ImgColor)
 		Image = Image or RBS_UI.ImageIcon.Server
 		ImgColor = ImgColor or Color3.fromRGB(255,255,255)
@@ -381,9 +385,9 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		local UIStroke = Instance.new("UIStroke")
 		local UIGradient_2 = Instance.new("UIGradient")
 		local UICorner_2 = Instance.new("UICorner")
-		
+
 		Scrol(ScrollingFrame,UIListLayout)
-		
+
 		Tab.Name = "Tab"
 		Tab.Parent = Frame
 		Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -395,7 +399,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		Tab.Size = UDim2.new(0.774999976, 0, 0.638000011, 0)
 		Tab.AnchorPoint = Vector2.new(0,0)
 		Tab.Visible = false
-		
+
 		UICorner.CornerRadius = UDim.new(0, 9)
 		UICorner.Parent = Tab
 
@@ -472,7 +476,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		TabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		TabButton.BorderSizePixel = 0
 		TabButton.Size = UDim2.new(0, 100, 0, 100)
-		
+
 		UIAspectRatioConstraint.AspectRatio = 1
 		UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
 		UIAspectRatioConstraint.DominantAxis= Enum.DominantAxis.Width
@@ -517,7 +521,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		ImageG.ImageTransparency = 0.200
 		ImageG.ScaleType = Enum.ScaleType.Fit
 		ImageG.ImageColor3 = ImgColor
-		
+
 		UICorner_3.CornerRadius = UDim.new(0, 4)
 		UICorner_3.Parent = ImageG
 
@@ -567,9 +571,10 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		UIPadding.PaddingLeft = UDim.new(0, 1)
 		UIPadding.PaddingRight = UDim.new(0, 1)
 		UIPadding.PaddingTop = UDim.new(0, 1)
-		
-		local TsbButtonCllicked = Instance.new("TextButton")
 
+		local TsbButtonCllicked = Instance.new("TextButton")
+		local CurrentSize = -3.5
+		
 		TsbButtonCllicked.Name = "TsbButtonCllicked"
 		TsbButtonCllicked.Parent = TabButton
 		TsbButtonCllicked.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -583,8 +588,28 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		TsbButtonCllicked.TextColor3 = Color3.fromRGB(0, 0, 0)
 		TsbButtonCllicked.TextSize = 14.000
 		TsbButtonCllicked.TextTransparency = 1.000
-		
+
 		table.insert(Tabs,Tab)
+		
+		TsbButtonCllicked.MouseEnter:Connect(function()
+			
+			TweenService:Create(UIPadding,TweenInfo.new(0.3,Enum.EasingStyle.Back,Enum.EasingDirection.Out),{
+				PaddingBottom = UDim.new(0, CurrentSize),
+				PaddingLeft = UDim.new(0, CurrentSize),
+				PaddingRight = UDim.new(0, CurrentSize),
+				PaddingTop = UDim.new(0, CurrentSize),
+			}):Play()
+			
+		end)
+		
+		TsbButtonCllicked.MouseLeave:Connect(function()
+			TweenService:Create(UIPadding,TweenInfo.new(0.3,Enum.EasingStyle.Back),{
+				PaddingBottom = UDim.new(0, 1),
+				PaddingLeft = UDim.new(0, 0),
+				PaddingRight = UDim.new(0, 1),
+				PaddingTop = UDim.new(0, 1),
+			}):Play()
+		end)
 		
 		local function OnToggleTo(value)
 			local CurrentTime = 0.1
@@ -611,7 +636,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 				end
 			end
 		end
-		
+
 		TabButton.Active = true
 		TsbButtonCllicked.Active = true
 		TsbButtonCllicked.ZIndex = 5
@@ -620,12 +645,12 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Create_Ripple(TabButton)
 			OnToggleTo(true)
 		end)
-		
+
 		Close.MouseButton1Click:Connect(function()
 			Create_Ripple(Close)
 			OnToggleTo(false)
 		end)
-		
+
 		function SectionAssets:NewButton(LabelStr:string,callback:FunctionalTest)
 			local ButtonAsset = {}
 			callback = callback or function() end
@@ -725,19 +750,19 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Button_Clicked.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Button_Clicked.TextSize = 14.000
 			Button_Clicked.TextTransparency = 1.000
-			
+
 			Button_Clicked.MouseButton1Click:Connect(function()
 				Create_Ripple(Button)
 				callback()
 			end)
-			
+
 			function ButtonAsset:Set(NewLabelStr)
 				Label.Text = NewLabelStr
 			end
-			
+
 			return ButtonAsset;
 		end
-		
+
 		function SectionAssets:NewToggle(LabelStr:string,info:boolean,callback:FunctionalTest)
 			local ToggleAsset = {}
 			callback = callback or function() end
@@ -844,7 +869,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Button_Clicked.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Button_Clicked.TextSize = 14.000
 			Button_Clicked.TextTransparency = 1.000
-			
+
 			local function ToggleTo(value)
 				if value then
 					ToggleImage.Size = UDim2.new(0.4,0,0.4,0)
@@ -860,7 +885,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					TweenService:Create(ToggleEffect,TweenInfo.new(0.5),{Transparency = 1}):Play()
 				end
 			end
-			
+
 			Button_Clicked.MouseButton1Click:Connect(function()
 				Create_Ripple(Toggle)
 				if ToggleValue then
@@ -868,22 +893,22 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 				else
 					ToggleValue = true
 				end
-				
+
 				ToggleTo(ToggleValue)
 				callback(ToggleValue)
 			end)
-			
+
 			function ToggleAsset:Set(Value)
 				ToggleValue = Value
 				ToggleTo(ToggleValue)
 				callback(ToggleValue)
 			end
-			
+
 			ToggleTo(ToggleValue)
-			
+
 			return ToggleAsset
 		end
-		
+
 		function SectionAssets:NewLabel(LabelStr:string)
 			local LabelAsset = {}
 			local Label = Instance.new("Frame")
@@ -984,14 +1009,14 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			UIGradient_4.Rotation = -45
 			UIGradient_4.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.67), NumberSequenceKeypoint.new(1.00, 0.00)}
 			UIGradient_4.Parent = Image
-			
+
 			function LabelAsset:Set(NewLabel)
 				Label_2.Text = NewLabel or "?Label?"
 			end
-			
+
 			return LabelAsset;
 		end
-		
+
 		function SectionAssets:NewDropdown(LabelStr:string,info:{string},callback:FunctionalTest)
 			local DropdownAssets = {}
 			local InfoList = info or {}
@@ -1022,20 +1047,20 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
 			local ScrollingFrameCSGO = Instance.new("ScrollingFrame")
 			local UIListLayout_2 = Instance.new("UIListLayout")
-			
+
 			Scrol(ScrollingFrameCSGO,UIListLayout_2)
-			
+
 			Dropdown.Name = "Dropdown"
 			Dropdown.Parent = ScrollingFrame
 			Dropdown.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
 			Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Dropdown.BorderSizePixel = 0
 			Dropdown.Size = UDim2.new(0.899999976, 0, 0.5, 0)
-			
+
 			UIAspectRatioConstraint.Parent = Dropdown
 			UIAspectRatioConstraint.AspectRatio = 1.500
 			UIAspectRatioConstraint.AspectType = Enum.AspectType.ScaleWithParentSize
-			
+
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = Dropdown
 
@@ -1180,7 +1205,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
 			UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 			UIListLayout_2.Padding = UDim.new(0,5)
-			
+
 			local function DropdownSet(value)
 				local Current = 0.15
 				if value then
@@ -1193,7 +1218,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					Droplist.Visible = false
 				end
 			end
-			
+
 			local function Show()
 				for i,v:TextButton in ipairs(ScrollingFrameCSGO:GetChildren()) do
 					if v:isA('TextButton') then
@@ -1230,7 +1255,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					UIGradient.Rotation = -45
 					UIGradient.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.07), NumberSequenceKeypoint.new(1.00, 0.00)}
 					UIGradient.Parent = Button
-					
+
 					local UIStroke = Instance.new("UIStroke")
 					UIStroke.Thickness = 1.300
 					UIStroke.Transparency = 0.900
@@ -1252,7 +1277,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					end)
 				end
 			end
-			
+
 			Button_Clicked.MouseButton1Click:Connect(function()
 				Create_Ripple(UI)
 				if DROPDOWN_TOGGLE then
@@ -1262,21 +1287,21 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 				end
 				DropdownSet(DROPDOWN_TOGGLE)
 			end)
-			
+
 			DropdownSet(false)
 			Show()
-			
+
 			function DropdownAssets:Set(List_New)
 				InfoList = List_New
 			end
-			
+
 			function DropdownAssets:Refresh()
 				Show()
 			end
-			
+
 			return DropdownAssets
 		end
-		
+
 		function SectionAssets:NewSlider(Min:number,Max:number,callback:FunctionalTest)
 			local SliderAssets = {}
 			Min = Min or 1
@@ -1304,7 +1329,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Slider.BorderSizePixel = 0
 			Slider.Size = UDim2.new(0.899999976, 0, 0.5, 0)
 			Slider.Active = true
-			
+
 			UIAspectRatioConstraint.Parent = Slider
 			UIAspectRatioConstraint.AspectRatio = 5.000
 
@@ -1326,7 +1351,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Front.Position = UDim2.new(0.5, 0, 0.5, 0)
 			Front.Size = UDim2.new(0.975000024, 0, 0.550000012, 0)
 			Front.Active = true
-			
+
 			UICorner_2.CornerRadius = UDim.new(0, 4)
 			UICorner_2.Parent = Front
 
@@ -1361,7 +1386,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			Move.Position = UDim2.new(0.00999999978, 0, 0.5, 0)
 			Move.Size = UDim2.new(0.01, 0, 0.8, 0)
 			Move.Active = true
-	
+
 			UICorner_3.CornerRadius = UDim.new(0, 4)
 			UICorner_3.Parent = Move
 
@@ -1384,7 +1409,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			UIGradient_3.Rotation = -45
 			UIGradient_3.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.07), NumberSequenceKeypoint.new(1.00, 0.00)}
 			UIGradient_3.Parent = Frame
-			
+
 			local Touching = false
 			Front.InputBegan:Connect(function(Input)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
@@ -1409,7 +1434,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					callback(Value)
 				end
 			end)
-			
+
 			function SliderAssets:Set(value)
 				NumberShowed.Text = tostring(value)
 				local SizeScale = math.clamp(value / Max,0,0.98)
@@ -1417,10 +1442,10 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 				TweenService:Create(Move,TweenInfo.new(0.1),{Size = Size}):Play()
 				callback(value)
 			end
-			
+
 			return SliderAssets;
 		end
-		
+
 		function SectionAssets:NewKeybinds(LabelStr:string,Info,callback)
 			Info = Info or Enum.KeyCode.X
 			callback = callback or function() end
@@ -1560,7 +1585,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			UIStroke.Color = Color3.fromRGB(255, 255, 255)
 			UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 			UIStroke.Parent = KEY
-			
+
 			Button_Clicked.MouseButton1Click:Connect(function()
 				if IsWait then
 					return
@@ -1586,7 +1611,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					callback(KeyBind)
 				end
 			end)
-			
+
 			function KeybindAssets:Set(KeyData:Enum.KeyCode)
 				if KeyData and KeyData~=Enum.KeyCode.Unknown then
 					KeyBind = KeyData
@@ -1596,16 +1621,18 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 					print('this is a unknow key code - [1550]')
 				end
 			end
+			
 			return KeybindAssets;
 		end
-		
+
 		return SectionAssets;
 	end
-	
+
 	function WindowAssets:Destroy()
 		Roblox_Studio_UI:Destroy()
 		return
 	end
+	
 	local Corrent = 0.1
 	UserInputService.InputBegan:Connect(function(Input)
 		if Input.KeyCode == RBS_UI.ToggleKey then
@@ -1618,7 +1645,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			end
 		end
 	end)
-	
+
 	Toggle.MouseButton1Click:Connect(function()
 		Create_Ripple(Toggle)
 		if Togggleing then
@@ -1629,7 +1656,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			TweenService:Create(Frame,TweenInfo.new(Corrent),{Size = UDim2.new(0.37, 0, 0.43, 0),Position = Toggle_LastPosition or UDim2.new(0.49999997, 0, 0.499320686, 0)}):Play()
 		end
 	end)
-	
+
 	local dragToggle = nil
 	local dragSpeed = 0.05
 	local dragStart = nil
@@ -1666,7 +1693,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 			end
 		end
 	end)
-	
+
 	table.insert(_G.AssetsRBSUI,Roblox_Studio_UI)
 	return WindowAssets,Roblox_Studio_UI;
 end
