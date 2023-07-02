@@ -142,7 +142,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame.BorderSizePixel = 0
 	Frame.Position = UDim2.new(0.49999997, 0, 0.499320686, 0)
-	Frame.Size = UDim2.new(0.4, 0, 0.43, 0)
+	Frame.Size = UDim2.new(0.37, 0, 0.43, 0)
 	Frame.ZIndex = -1
 	Frame.ClipsDescendants = true
 	Frame.Active = true
