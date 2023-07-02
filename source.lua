@@ -26,6 +26,11 @@ local RBS_UI = {
 		Users = "rbxassetid://7743876054",
 		Client = "rbxassetid://7743875962",
 		Shop = "rbxassetid://7734056747",
+		Phone = "rbxassetid://7734058979",
+		Tablet = "rbxassetid://7743872620",
+		Sound = "rbxassetid://7743877250",
+		Key = "rbxassetid://7733965118",
+		Home = "rbxassetid://7733960981"
 	},
 	ToggleKey = Enum.KeyCode.RightControl,
 	CanMove = true,
@@ -326,7 +331,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 
 	UIGridLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 		wait()
-		TweenService:Create(Section,TweenInfo.new(0.3),{CanvasSize = UDim2.new(0,0,0,UIGridLayout.AbsoluteContentSize.Y * 2)}):Play()
+		TweenService:Create(Section,TweenInfo.new(0.3),{CanvasSize = UDim2.new(0,0,0,UIGridLayout.AbsoluteContentSize.Y * 1.5)}):Play()
 	end)
 	
 	local LogLoad = Instance.new("Frame")
