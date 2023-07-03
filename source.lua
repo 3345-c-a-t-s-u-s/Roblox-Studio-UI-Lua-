@@ -187,7 +187,8 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 	Title.TextSize = 14.000
 	Title.TextWrapped = true
 	Title.TextXAlignment = Enum.TextXAlignment.Left
-
+	Title.RichText = true
+	
 	UserProfile.Name = "UserProfile"
 	UserProfile.Parent = Frame
 	UserProfile.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
@@ -566,7 +567,7 @@ function RBS_UI:NewWindow(TitleStr : string,UserStats : string)
 		Title.TextScaled = true
 		Title.TextSize = 14.000
 		Title.TextWrapped = true
-
+		Title.RichText = true
 		UIGradient_4.Rotation = -45
 		UIGradient_4.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0.00, 0.07), NumberSequenceKeypoint.new(1.00, 0.00)}
 		UIGradient_4.Parent = Title
